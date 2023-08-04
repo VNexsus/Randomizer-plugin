@@ -23,4 +23,5 @@
 *	Для установки плагина скачайте файл randomizer.plugin следуйте инструкциям на сайте Р7-Офиc
 
 ## Использованные компоненты
-Сторонние зависимости не используются
+* JQuery <a href="https://github.com/jquery/jquery">(GitHub)</a>
+* select2 <a href="https://github.com/select2/select2">(GitHub)</a>
