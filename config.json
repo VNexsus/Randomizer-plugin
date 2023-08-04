@@ -1,0 +1,52 @@
+{
+    "name" : "Randomizer",
+    "guid" : "asc.{2E935B75-113D-4613-BEA0-8879A775A42F}",
+	"version": "1.0",
+
+    "variations" : [
+        {
+            "description" : "Randomizer",
+            "url"         : "index.html",
+
+            "icons"           : ["resources/img/icon.png", "resources/img/icon@2x.png"],
+            "isViewer"        : true,
+            "EditorsSupport"  : ["cell"],
+
+            "isVisual"        : true,
+            "isModal"         : true,
+            "isInsideMode"    : false,
+
+            "initDataType"    : "text",
+            "initData"        : "",
+
+            "isUpdateOleOnResize" : true,
+
+            "buttons"        : [
+                {
+                    "text": "Insert Text",
+                    "primary": true,
+                    "textLocale": {
+                        "ru": "Вставить",
+                        "fr": "Insérer",
+                        "es": "Insertar",
+                        "de": "Einfügen"
+                    }
+                },
+                {
+                    "text": "Cancel",
+                    "primary": false,
+                    "textLocale": {
+                        "ru": "Отмена",
+                        "fr": "Annuler",
+                        "es": "Cancelar",
+                        "de": "Abbrechen"
+                    }
+                }
+			],
+			
+			"size": [ 500, 250 ],
+			
+			"initOnSelectionChanged": true
+        }
+    ]
+}

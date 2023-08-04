@@ -1,0 +1,197 @@
+<!--
+ (c) Copyright VNexsus 2021
+
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+
+     http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+ -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Random Codes Generator</title>
+
+	<script type="text/javascript" src="../v1/plugins.js"></script>
+    <script type="text/javascript" src="../v1/plugins-ui.js"></script>
+	<script src="vendor/jQuery-2.2.2-min/jquery-v2.2.2-min.js"></script>
+	<script src="vendor/select2-4.0.6-rc.1/dist/js/select2.js"></script>
+	<script src="scripts/script.js"></script>
+
+    <link rel="stylesheet" href="resources/css/plugins.css">
+	<link rel="stylesheet" href="vendor/select2-4.0.6-rc.1/dist/css/select2.css"/>
+	<style>
+		html, body {
+			min-height: 100% !important;
+			height: 100%;
+			overflow-y:hidden;
+            overflow-x: hidden;
+		}
+
+		.noselect {
+			-khtml-user-select: none;
+			user-select: none;
+			-moz-user-select: none;
+			-webkit-user-select: none;
+		}
+
+		td {
+			background: transparent;
+			border:0;
+		}
+
+		input[type="radio"], input[type="checkbox"]{
+			height: 12px;
+			vertical-align: text-bottom;
+			margin-bottom: 0;
+		}
+		
+		.cellpad{
+			padding-left: 1.5rem;
+		}
+		
+		* {
+			user-select: none;
+		}
+		.pattern{
+			font-size: 12px;
+			width: 20px;
+			text-align: center;
+			box-shadow: 0 0 2px rgba(0,0,0,0.3);
+			margin: 2px 2px;
+			border: 0;
+		}
+		.pattern:focus{
+		    box-shadow: 0 0 0 2px rgba(66,133,244,0.5);
+		}
+		.pattern::-webkit-input-placeholder {
+			color: #ccc;
+		} 
+		.pattern::-moz-placeholder {
+			color: #eee;
+		}
+		.pattern:focus::placeholder {
+		  color: transparent;
+		}
+		.shade{
+			position: absolute;
+			display: table;
+			width: 100%;
+			height: 100%;
+			vertical-align: middle;
+			top: 0;
+			background-color: rgba(0,0,0,.3);
+			z-index: 100;
+			animation: intro 0.3s both;
+			animation-delay: 0.15s;
+		}
+		.popup-container{
+			display: table-cell;
+			vertical-align: middle;
+			text-align: center;
+		}
+		.popup{
+			width: 250px;
+			height: 120px;
+			margin: auto;
+			display: table;
+			text-align: center;
+			vertical-align: middle;
+			background-color: #f7f7f7;
+			border-radius: 5px;
+			animation: intro 0.3s both;
+			animation-delay: 0.15s;
+		}
+		.popup-body{
+			display: table-cell;
+			vertical-align: middle;
+			box-shadow: 0 0 15px rgba(0,0,0,.7);
+		}
+
+		@keyframes intro {
+			0% {
+				opacity: 0;
+			}
+				100% {
+				opacity: 1;
+			}
+		}
+		
+		.popup-body .button-container{
+			margin-top: 10px;
+		}
+
+		.popup-body .inprogress{
+			background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMCAyMCI+PGNpcmNsZSBjeD0iMTAiIGN5PSIxMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNDQ0IiBzdHJva2Utd2lkdGg9IjEuNSIgcj0iNy4yNSIgc3Ryb2tlLWRhc2hhcnJheT0iMTYwJSwgNDAlIiAvPjwvc3ZnPg==);
+			height: 20px;
+			width: 20px;
+			animation-duration: .8s;
+			animation-name: rotation;
+			animation-iteration-count: infinite;
+			animation-timing-function: linear;
+			display: inline-block;
+			margin: 0.5rem;
+		}
+		
+	</style>
+</head>
+<body style="width: 100%;height: 100%; padding: 0; margin: 0">
+	<div id="scrollable-container-id" style="position: relative; height: 100%; overflow: hidden; padding: 8px;">
+		<table cellpadding="2" cellspacing="0" border="0" width="100%">
+			<tr>
+				<td>Шаблон значений</td>
+				<td><select id="patterns" style="width: 200px"></select></td>
+				<td>Длина значения</td>
+				<td><input type="number" id="length" class="form-control" min="5" max="25" value="5" maxlength="4" size="5" style="width: 40px"></td>
+			</tr>
+			<tr>
+				<td>Количество значений</td>
+				<td><input type="number" id="quantity" class="form-control" maxlength="4" min="1" max="1000" value="10" value="1" size="5" style="width: 60px"></td>
+			</tr>
+			<tr>
+				<td colspan="4" style="height: 95px" align="center" id="pattern"></td>
+			</tr>
+			<tr>
+				<td colspan="4">
+					Для генерации значений использовать следующие наборы
+				</td>
+			</tr>
+			<tr>
+				<td colspan="4">
+					<table cellpadding="2" cellspacing="0" border="0" width="100%">
+						<tr>
+							<td><input type="checkbox" id="numbers" checked> <label for="numbers">цифры 0123456789</label></td>
+							<td><input type="checkbox" id="symbols"> <label for="symbols">специальные символы =%*$#&?@</label></td>
+						</tr>
+						<tr>
+							<td><input type="checkbox" id="letters" checked> <label for="letters">латинские буквы ABCDEF</label></td>
+							<td><input type="checkbox" id="custom"> <label for="custom">произвольный набор символов</label></td>
+						</tr>
+						<tr>
+							<td></td>
+							<td class="cellpad"><input type="text" id="customset" class="form-control" disabled style="width: 100%;"></td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<div id="popup" class="shade" style="display:none">
+		<div class="popup-container">
+			<div class="popup">
+				<div class="popup-body">
+					<div id="message" style="margin: 5px;"></div>
+					<span id="progress"></span>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
