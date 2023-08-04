@@ -20,7 +20,7 @@
 *	Сервер документов (онлайн редактор)
 
 ## Как установить
-*	Для установки плагина скачайте файл randomizer.plugin следуйте инструкциям на сайте Р7-Офиc
+*	Для установки плагина скачайте файл <a href="https://github.com/VNexsus/Randomizer-plugin/blob/main/randomizer.plugin">randomizer.plugin</a> следуйте инструкциям на сайте <a href="https://support.r7-office.ru/desktop_editors/api_desktop_editors/api_desktop_editors_general/adding-plugins/">Р7-Офиc</a>
 
 ## Использованные компоненты
 * JQuery <a href="https://github.com/jquery/jquery">(GitHub)</a>
